@@ -1,0 +1,50 @@
+{
+    "name": "brunocfalcao/eduka-analytics",
+    "description": "Eduka analytics, fetching the user actions and agent source, to be used with Eduka LMS",
+    "keywords": [
+        "brunocfalcao",
+        "eduka"
+    ],
+    "homepage": "https://github.com/brunocfalcao/eduka-analytics",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Bruno Falcão",
+            "email": "bruno.c.falcao@brunofalcao.me",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "brunocfalcao/eduka-cube": "dev-master",
+        "brunocfalcao/eduka-abstracts": "dev-master",
+        "jenssegers/agent": "^2.6",
+        "snowplow/referer-parser": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Eduka\\Analytics\\": "src"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Eduka\\Analytics\\EdukaAnalyticsServiceProvider"
+            ]
+        }
+    }
+}
