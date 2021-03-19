@@ -20,7 +20,6 @@ return [
 
         Eduka\Analytics\Goals\NthVisit::class,
 
-
          /*
           * 1st-time: A visitor that visited, once, the website
           * nth-times: A visitor that visited, more than once, the website.
