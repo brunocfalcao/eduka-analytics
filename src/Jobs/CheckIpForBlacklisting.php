@@ -17,8 +17,6 @@ class CheckIpForBlacklisting extends EdukaJob
     public function __construct(string $ip)
     {
         $this->ip = $ip;
-
-        $this->onQueue(queue_name('ip-blacklist-check'));
     }
 
     /**

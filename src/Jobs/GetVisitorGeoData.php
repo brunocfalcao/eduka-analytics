@@ -20,8 +20,6 @@ class GetVisitorGeoData extends EdukaJob
     {
         $this->id = $id;
         $this->ip = $ip == '127.0.0.1' ? '188.62.12.60' : $ip;
-
-        $this->onQueue(queue_name('geoip-data'));
     }
 
     /**
