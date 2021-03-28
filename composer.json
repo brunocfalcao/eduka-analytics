@@ -19,8 +19,7 @@
         "php": "^7.4|^8.0",
         "brunocfalcao/eduka-cube": "dev-master",
         "brunocfalcao/eduka-abstracts": "dev-master",
-        "jenssegers/agent": "^2.6",
-        "snowplow/referer-parser": "dev-master"
+        "jenssegers/agent": "^2.6"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0"

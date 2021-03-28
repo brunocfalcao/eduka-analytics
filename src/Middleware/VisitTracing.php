@@ -5,6 +5,8 @@ namespace Eduka\Analytics\Middleware;
 use Closure;
 use Eduka\Analytics\Models\Visit;
 use Eduka\Analytics\Models\Visitor;
+use Eduka\Analytics\Services\Campaign;
+use Eduka\Analytics\Services\Referrer;
 use Illuminate\Http\Request;
 use Snowplow\RefererParser\Parser;
 
@@ -21,13 +23,22 @@ class VisitTracing
     {
         $visitor = Visitor::findMe();
 
-        /**
+        $campaign = Campaign::get();
+
+        $referrer = Referrer::get();
+
+        /*
          * Compute the referer.
          **/
+
+        dd($campaign);
+
         $referrer_url = request()->headers->get('referer');
         $referrer_medium = null;
         $referrer_name = null;
         $referrer_search_terms = null;
+
+        dd($referrer_url);
 
         if (! empty($referrer_url)) {
             $parser = new Parser();
