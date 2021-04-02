@@ -91,27 +91,15 @@ class CreateAnalyticsSchema extends Migration
             $table->string('path')
                   ->comment('The url path, not including the full url');
 
-            $table->string('full_path')
-                  ->comment('The full url path');
+            $table->string('referrer')
+                  ->comment('The referrer, if exists');
 
-            $table->string('referrer_url')
+            $table->string('base_referrer')
                   ->comment('If an HTTP REFERER exists this is the full url path')
                   ->nullable();
 
-            $table->string('referrer_name')
-                  ->comment('If an HTTP REFERER exists, it will be written here')
-                  ->nullable();
-
-            $table->string('referrer_medium')
-                  ->comment('The referrer medium')
-                  ->nullable();
-
-            $table->string('referrer_search_terms')
-                  ->comment('The referrer medium')
-                  ->nullable();
-
             $table->string('campaign')
-                  ->comment('If there is a querystring with the name ?cmpgn=xxx then it is recorded here')
+                  ->comment('If there is a querystring with the name ?cmpgn=xxx or ?utm_source=xxx then it is recorded here')
                   ->nullable();
 
             $table->engine = 'InnoDB';

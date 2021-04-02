@@ -20,7 +20,7 @@ class IpTracing
     public function handle(Request $request, Closure $next)
     {
         $record = IpAddress::firstOrNew([
-            'ip_address' => request()->ip(), ]);
+            'ip_address' => ip2(), ]);
 
         $record->increment('hits');
         $record->save();
@@ -30,11 +30,11 @@ class IpTracing
         }
 
         if ($record->is_blacklisted) {
-            throw new EdukaException('Sorry, your IP address ('.request()->ip().') is blacklisted. Please contact '.env('APP_NAME').' support');
+            throw new EdukaException('Sorry, your IP address ('.ip2().') is blacklisted. Please contact '.env('APP_NAME').' support');
         }
 
         // Update IP blacklist analysis, if necessary.
-        CheckIpForBlacklisting::dispatch(request()->ip());
+        CheckIpForBlacklisting::dispatch(ip2());
 
         return $next($request);
     }

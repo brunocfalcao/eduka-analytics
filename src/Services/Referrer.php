@@ -12,11 +12,8 @@ class Referrer
 
 class ReferrerService
 {
-    protected $referrer = null;
-
     public function __construct()
     {
-        $this->referrer = $this->find();
     }
 
     public static function new(...$args)
@@ -24,24 +21,53 @@ class ReferrerService
         return new self(...$args);
     }
 
-    public function get()
+    public function refresh()
     {
-        return $this->referrer;
-    }
+        if (request()->header('referer', null)) {
+            // We do have a referrer header. It will be the first time.
+            session(['eduka.analytics.referrer.name' => request()->header('referer')]);
+            session(['eduka.analytics.referrer.host' => $this->host()]);
+            session(['eduka.analytics.referrer.first-request' => true]);
 
-    private function find()
-    {
-        if (request()->headers->get('referer')) {
-            return $this->store();
-        } elseif (session('eduka.analytics.referrer')) {
-            return session('eduka.analytics.referrer');
+            return;
+        }
+
+        if ($this->onSession()) {
+            // It already existed, so it will not be a first request.
+            session(['eduka.analytics.referrer.first-request' => false]);
+
+            return;
         }
     }
 
-    private function store()
+    public function get()
     {
-        session(['eduka.analytics.referrer' => request()->headers->get('referer')]);
+        if (!$this->onSession()) {
+            return null;
+        }
 
-        return request()->headers->get('referer');
+        $result = new \StdClass();
+
+        $result->name = session('eduka.analytics.referrer.name');
+        $result->base = session('eduka.analytics.referrer.base');
+        $result->firstRequest = session('eduka.analytics.referrer.first-request');
+
+        return $result;
+    }
+
+    protected function onSession()
+    {
+        return !! session('eduka.analytics.referrer.name');
+    }
+
+    protected function host()
+    {
+        $parts = parse_url(request()->fullUrl());
+
+        if ($parts === false || ! isset($parts['host'])) {
+            return '';
+        }
+
+        return $parts['host'];
     }
 }

@@ -28,7 +28,7 @@ class Visitor extends EdukaModel
      *
      * @return Eduka\Cube\Models\Visitor
      */
-    public static function findMe()
+    public static function locate()
     {
         /*
          * In case the visitor session is already loaded, we don't need
@@ -57,12 +57,16 @@ class Visitor extends EdukaModel
                 'hash' => $hash,
             ]);
 
-            GetVisitorGeoData::dispatch($visitor->id, request()->ip());
-
+            GetVisitorGeoData::dispatch($visitor->id, ip2());
             session(['eduka.analytics.visitor.id' => $visitor->id]);
 
             return $visitor;
         });
+    }
+
+    public function store()
+    {
+        session(['eduka.analytics.visit.id' => $visit->id]);
     }
 
     /**
