@@ -19,11 +19,16 @@ class IpTracing
      */
     public function handle(Request $request, Closure $next)
     {
-        $record = IpAddress::firstOrNew([
+        $record = IpAddress::where('ip_address', ip2())->firstOrNew([
             'ip_address' => ip2(), ]);
 
         $record->increment('hits');
         $record->save();
+
+        // Local environments don´t need to check for blacklist of throttling.
+        if (app()->environment() == 'local') {
+            return $next($request);
+        }
 
         if ($record->is_throttled) {
             throw new EdukaException('Sorry, your IP address is throttled. Please wait until it is released, or if not please contact '.env('APP_NAME').' support');

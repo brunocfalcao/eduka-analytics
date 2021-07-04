@@ -18,7 +18,7 @@ return [
 
     'goals' => [
 
-        Eduka\Analytics\Goals\NthVisit::class,
+        //Eduka\Analytics\Goals\NthVisit::class,
 
          /*
           * 1st-time: A visitor that visited, once, the website

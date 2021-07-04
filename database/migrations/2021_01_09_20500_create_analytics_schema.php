@@ -84,6 +84,9 @@ class CreateAnalyticsSchema extends Migration
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
 
+            $table->string('session')
+                  ->comment('Unique session id for the visits that the visitor is performing');
+
             $table->foreignId('visitor_id')
                   ->nullable()
                   ->constrained();
@@ -91,12 +94,21 @@ class CreateAnalyticsSchema extends Migration
             $table->string('path')
                   ->comment('The url path, not including the full url');
 
+            $table->string('route_name')
+                  ->nullable()
+                  ->comment('Route name in case it exists');
+
+            $table->string('goal_achieved')
+                  ->nullable()
+                  ->comment('If a goal (E.g.: "course bought") is achieved, is it written here');
+
             $table->string('referrer')
+                  ->nullable()
                   ->comment('The referrer, if exists');
 
             $table->string('base_referrer')
-                  ->comment('If an HTTP REFERER exists this is the full url path')
-                  ->nullable();
+                  ->nullable()
+                  ->comment('If an HTTP REFERER exists this is the full url path');
 
             $table->string('campaign')
                   ->comment('If there is a querystring with the name ?cmpgn=xxx or ?utm_source=xxx then it is recorded here')

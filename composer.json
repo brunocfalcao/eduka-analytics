@@ -27,7 +27,10 @@
     "autoload": {
         "psr-4": {
             "Eduka\\Analytics\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "scripts": {
         "test": "vendor/bin/phpunit",

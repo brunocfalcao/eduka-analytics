@@ -3,10 +3,8 @@
 namespace Eduka\Analytics\Middleware;
 
 use Closure;
-use Eduka\Analytics\Models\Visit;
-use Eduka\Analytics\Models\Visitor;
-use Eduka\Analytics\Services\Campaign;
 use Eduka\Analytics\Services\Referrer;
+use Eduka\Analytics\Services\Visit;
 use Illuminate\Http\Request;
 
 class VisitTracing
@@ -20,9 +18,11 @@ class VisitTracing
      */
     public function handle(Request $request, Closure $next)
     {
+        // Refresh referrer, in case it exists.
         Referrer::refresh();
 
-        Visit::store();
+        // Record the visit + GeoIP operations.
+        $visit = Visit::record();
 
         return $next($request);
     }
