@@ -25,7 +25,7 @@ class IpTracing
         $record->increment('hits');
         $record->save();
 
-        // Local environments don´t need to check for blacklist of throttling.
+        // Local environments don't need to check for blacklist of throttling.
         if (app()->environment() == 'local') {
             return $next($request);
         }

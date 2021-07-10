@@ -2,8 +2,8 @@
 
 namespace Eduka\Analytics\Services;
 
-use Eduka\Analytics\Models\Visitor as VisitorModel;
 use Eduka\Analytics\Jobs\GetVisitorGeoData;
+use Eduka\Analytics\Models\Visitor as VisitorModel;
 use Illuminate\Support\Facades\Hash;
 use Jenssegers\Agent\Facades\Agent;
 

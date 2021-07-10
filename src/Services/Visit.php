@@ -2,9 +2,8 @@
 
 namespace Eduka\Analytics\Services;
 
-use Illuminate\Support\Str;
-use Eduka\Analytics\Services\Visitor;
 use Eduka\Analytics\Models\Visit as VisitModel;
+use Illuminate\Support\Str;
 
 class Visit
 {
@@ -35,7 +34,7 @@ class VisitService
     public function session()
     {
         // Autogenerate a session id, and put it in session.
-        if (!session('eduka.analytics.visit.session')) {
+        if (! session('eduka.analytics.visit.session')) {
             $session = Str::random(10);
             session(['eduka.analytics.visit.session' => $session]);
 
@@ -54,6 +53,7 @@ class VisitService
     public function getModelInstance()
     {
         $id = $this->id();
+
         return VisitModel::firstWhere('id', $id);
     }
 

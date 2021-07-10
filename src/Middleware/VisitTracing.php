@@ -22,7 +22,7 @@ class VisitTracing
         Referrer::refresh();
 
         // Record the visit + GeoIP operations.
-        $visit = Visit::record();
+        Visit::record();
 
         return $next($request);
     }

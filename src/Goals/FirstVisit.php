@@ -3,7 +3,6 @@
 namespace Eduka\Analytics\Goals;
 
 use Eduka\Abstracts\EdukaGoal;
-use Eduka\Analytics\Services\Visit;
 
 class FirstVisit extends EdukaGoal
 {
