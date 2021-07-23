@@ -34,9 +34,11 @@ class IpTracing
             throw new EdukaException('Sorry, your IP address is throttled. Please wait until it is released, or if not please contact '.env('APP_NAME').' support');
         }
 
+        /*
         if ($record->is_blacklisted) {
             throw new EdukaException('Sorry, your IP address ('.ip2().') is blacklisted. Please contact '.env('APP_NAME').' support');
         }
+        */
 
         // Update IP blacklist analysis, if necessary.
         CheckIpForBlacklisting::dispatch(ip2());
