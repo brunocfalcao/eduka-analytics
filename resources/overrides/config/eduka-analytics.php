@@ -20,16 +20,16 @@ return [
 
         //Eduka\Analytics\Goals\NthVisit::class,
 
-         /*
-          * 1st-time: A visitor that visited, once, the website
-          * nth-times: A visitor that visited, more than once, the website.
-          * purchase-click: A visitor that clicked on the purchase.
-          * purchased-completed: A visitor that completed the purchase.
-          * purchase-abandoned: A visitor that abandoned the purchase.
-          * from-promotion: A visitor that refered from a promotional campaign.
-          * from-referal: A visitor that refered from another named referal.
-          * refunded: A visitor that requested a refund.
-          */
+        /*
+         * 1st-time: A visitor that visited, once, the website
+         * nth-times: A visitor that visited, more than once, the website.
+         * purchase-click: A visitor that clicked on the purchase.
+         * purchased-completed: A visitor that completed the purchase.
+         * purchase-abandoned: A visitor that abandoned the purchase.
+         * from-promotion: A visitor that refered from a promotional campaign.
+         * from-referal: A visitor that refered from another named referal.
+         * refunded: A visitor that requested a refund.
+         */
 
     ],
 
