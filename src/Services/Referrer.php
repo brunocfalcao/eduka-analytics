@@ -24,9 +24,12 @@ class ReferrerService
     public function refresh()
     {
         // Can be a HTTP_REFERER or the ?utm_source=.
-        if (request()->header('referer', null)) {
+        $referer = request()->header('referer', null);
+        $utm_source = request()->input('utm_source', null);
+
+        if ($referer && Pathfinder::isExternal()) {
             // We do have a referrer header. It will be the first time.
-            session(['eduka.analytics.referrer.name' => request()->header('referer')]);
+            session(['eduka.analytics.referrer.name' => $referer]);
             session(['eduka.analytics.referrer.base' => $this->host()]);
             session(['eduka.analytics.referrer.first-request' => true]);
 
@@ -35,7 +38,7 @@ class ReferrerService
 
         if (request()->input('utm_source', null)) {
             // We do have an utm_source querystring, for the first time.
-            session(['eduka.analytics.referrer.name' => request()->input('utm_source')]);
+            session(['eduka.analytics.referrer.name' => $utm_source]);
             session(['eduka.analytics.referrer.base' => $this->host()]);
             session(['eduka.analytics.referrer.first-request' => true]);
 
