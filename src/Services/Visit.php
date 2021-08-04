@@ -4,6 +4,7 @@ namespace Eduka\Analytics\Services;
 
 use Eduka\Analytics\Models\Visit as VisitModel;
 use Illuminate\Support\Str;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
 
 class Visit
 {
@@ -87,15 +88,21 @@ class VisitService
     public function record()
     {
         $visitor = Visitor::get();
-
         $referrer = Referrer::get();
         $campaign = Campaign::get();
+
+        // Verify if the request is a bot request.
+        $CrawlerDetect = new CrawlerDetect;
+
+        // Check the user agent of the current 'visitor'
+        $isBot = $CrawlerDetect->isCrawler();
 
         $visit = VisitModel::saveWith([
             'session' => $this->session(),
             'visitor_id' => $visitor->id,
             'path' => request()->path(),
             'route_name' => request()->route()->getName(),
+            'is_bot' => $isBot,
             'referrer' => $referrer->name,
             'base_referrer' => $referrer->base,
             'campaign' => $campaign->name,
