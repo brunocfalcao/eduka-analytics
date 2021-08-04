@@ -2,6 +2,8 @@
 
 namespace Eduka\Analytics\Services;
 
+use Eduka\Pathfinder\Pathfinder;
+
 class Referrer
 {
     public static function __callStatic($method, $args)
