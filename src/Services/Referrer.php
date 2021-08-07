@@ -31,25 +31,25 @@ class ReferrerService
 
         if ($referer && Pathfinder::isExternal()) {
             // We do have a referrer header. It will be the first time.
-            session(['eduka.analytics.referrer.name' => $referer]);
-            session(['eduka.analytics.referrer.base' => $this->host()]);
-            session(['eduka.analytics.referrer.first-request' => true]);
+            session(['eduka-analytics-referrer-name' => $referer]);
+            session(['eduka-analytics-referrer-base' => $this->host()]);
+            session(['eduka-analytics-referrer-first-request' => true]);
 
             return;
         }
 
         if (request()->input('utm_source', null)) {
             // We do have an utm_source querystring, for the first time.
-            session(['eduka.analytics.referrer.name' => $utm_source]);
-            session(['eduka.analytics.referrer.base' => $this->host()]);
-            session(['eduka.analytics.referrer.first-request' => true]);
+            session(['eduka-analytics-referrer-name' => $utm_source]);
+            session(['eduka-analytics-referrer-base' => $this->host()]);
+            session(['eduka-analytics-referrer-first-request' => true]);
 
             return;
         }
 
         if ($this->onSession()) {
             // It already existed, so it will not be a first request.
-            session(['eduka.analytics.referrer.first-request' => false]);
+            session(['eduka-analytics-referrer-first-request' => false]);
 
             return;
         }
@@ -59,16 +59,16 @@ class ReferrerService
     {
         $result = new \StdClass();
 
-        $result->name = session('eduka.analytics.referrer.name');
-        $result->base = session('eduka.analytics.referrer.base');
-        $result->firstRequest = session('eduka.analytics.referrer.first-request');
+        $result->name = session('eduka-analytics-referrer-name');
+        $result->base = session('eduka-analytics-referrer-base');
+        $result->firstRequest = session('eduka-analytics-referrer-first-request');
 
         return $result;
     }
 
     protected function onSession()
     {
-        return (bool) session('eduka.analytics.referrer.name');
+        return (bool) session('eduka-analytics-referrer-name');
     }
 
     protected function host()

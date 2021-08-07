@@ -43,9 +43,9 @@ class VisitorService
          * In case the visitor session is already loaded, we don't need
          * to make anything else.
          **/
-        if (session('eduka.analytics.visitor.id')) {
-            if (optional(VisitorModel::find(session('eduka.analytics.visitor.id')))->first()) {
-                return VisitorModel::find(session('eduka.analytics.visitor.id'))->first();
+        if (session('eduka-analytics-visitor-id')) {
+            if (optional(VisitorModel::find(session('eduka-analytics-visitor-id')))->first()) {
+                return VisitorModel::find(session('eduka-analytics-visitor-id'))->first();
             }
         }
 
@@ -70,7 +70,7 @@ class VisitorService
 
             GetVisitorGeoData::dispatch($visitor->id, ip2());
 
-            session(['eduka.analytics.visitor.id' => $visitor->id]);
+            session(['eduka-analytics-visitor-id' => $visitor->id]);
 
             return $visitor;
         });

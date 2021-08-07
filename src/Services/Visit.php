@@ -35,14 +35,14 @@ class VisitService
     public function session()
     {
         // Autogenerate a session id, and put it in session.
-        if (! session('eduka.analytics.visit.session')) {
+        if (! session('eduka-analytics-visit-session')) {
             $session = Str::random(10);
-            session(['eduka.analytics.visit.session' => $session]);
+            session(['eduka-analytics-visit-session' => $session]);
 
             return $session;
         }
 
-        return session('eduka.analytics.visit.session');
+        return session('eduka-analytics-visit-session');
     }
 
     /**
@@ -66,7 +66,7 @@ class VisitService
      */
     public function updateId(int $id)
     {
-        session(['eduka.analytics.visit.id' => $id]);
+        session(['eduka-analytics-visit-id' => $id]);
     }
 
     /**
@@ -76,7 +76,7 @@ class VisitService
      */
     public function id()
     {
-        return session('eduka.analytics.visit.id', null);
+        return session('eduka-analytics-visit-id', null);
     }
 
     /**
@@ -90,6 +90,7 @@ class VisitService
         $visitor = Visitor::get();
         $referrer = Referrer::get();
         $campaign = Campaign::get();
+        $course = course();
 
         // Verify if the request is a bot request.
         $CrawlerDetect = new CrawlerDetect;
@@ -103,6 +104,7 @@ class VisitService
             'path' => request()->path(),
             'route_name' => request()->route()->getName(),
             'is_bot' => $isBot,
+            'course_id' => optional($course)->id,
             'referrer' => $referrer->name,
             'base_referrer' => $referrer->base,
             'campaign' => $campaign->name,

@@ -27,7 +27,7 @@ class CampaignService
         $result->name = request()->input('cmpg', null);
 
         if ($result->name) {
-            session(['eduka.analytics.campaign.name' => $result->name]);
+            session(['eduka-analytics-campaign-name' => $result->name]);
         }
 
         return $result;
