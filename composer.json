@@ -19,7 +19,7 @@
         "brunocfalcao/eduka-abstracts": "dev-master",
         "brunocfalcao/cerebrus": "dev-master",
         "jaybizzle/crawler-detect": "^1.2",
-        "illuminate/contracts": "^9.0",
+        "illuminate/contracts": "^10.0",
         "jenssegers/agent": "^2.6"
     },
     "autoload": {
